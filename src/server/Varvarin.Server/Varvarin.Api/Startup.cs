@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Net.WebSockets;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Varvarin.Engine;
 
 namespace Varvarin.Api
 {
@@ -37,7 +32,7 @@ namespace Varvarin.Api
                 {
                     var guid = Guid.NewGuid();
                     messageQueues.GetOrAdd(guid, new ConcurrentQueue<string>());
-                    new Processor(guid, messageQueues).Add(await context.WebSockets.AcceptWebSocketAsync());
+                    new Processor(guid, messageQueues, await context.WebSockets.AcceptWebSocketAsync(), 4 * 1024).Start(); ;
                 }
                 else
                 {
