@@ -13,7 +13,7 @@ namespace Varvarin.Ui
             var safeToEnd = true;
             var safeToWrite = true;
             var clientGuid = Guid.NewGuid();
-            client.ConnectAsync(new Uri("ws://localhost:5001/ws"), CancellationToken.None).GetAwaiter().GetResult();
+            client.ConnectAsync(new Uri("ws://localhost:49890/ws"), CancellationToken.None).GetAwaiter().GetResult();
             Console.CancelKeyPress += new ConsoleCancelEventHandler((object sender, ConsoleCancelEventArgs args) =>
             {
                 while (!safeToEnd) {}
